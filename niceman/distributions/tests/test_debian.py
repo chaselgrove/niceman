@@ -14,8 +14,10 @@ from pprint import pprint
 from niceman.distributions.debian import DebTracer
 
 import mock
+from niceman.tests.utils import skip_if
+from niceman.utils import on_debian
 
-
+@skip_if(not on_debian)
 def test_dpkg_manager_identify_packages():
     files = ["/sbin/iptables"]
     tracer = DebTracer()
@@ -70,6 +72,7 @@ def test_dpkg_manager_identify_packages():
 #             fp('oths_d_d_data_non-free_binary-i386_Packages')) is None
 
 
+@skip_if(not on_debian)
 def test_utf8_file():
     files = [u"/usr/share/ca-certificates/mozilla/"
              u"TÜBİTAK_UEKAE_Kök_Sertifika_Hizmet_Sağlayıcısı_-_Sürüm_3.crt"]
@@ -87,6 +90,7 @@ def test_utf8_file():
         assert True
 
 
+@skip_if(not on_debian)
 def test_parse_dpkgquery_line():
     parse = DebTracer._parse_dpkgquery_line
     assert parse('zlib1g:i386: /lib/i386-linux-gnu/libz.so.1.2.8') == \
@@ -101,6 +105,7 @@ def test_parse_dpkgquery_line():
     assert parse('diversion by dash from: /bin/sh') is None
 
 
+@skip_if(not on_debian)
 def test_get_packagefields_for_files():
     manager = DebTracer()
     # TODO: mock! and bring back afni and fail2ban

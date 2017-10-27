@@ -44,10 +44,12 @@ on_osx = _platform_system == 'darwin'
 on_linux = _platform_system == 'linux'
 try:
     linux_distribution = platform.linux_distribution()
+    on_debian = linux_distribution[0] == 'debian'
     on_debian_wheezy = on_linux \
-                       and linux_distribution[0] == 'debian' \
+                       and on_debian \
                        and linux_distribution[1].startswith('7.')
 except:  # pragma: no cover
+    on_debian = False
     on_debian_wheezy = False
 
 #
