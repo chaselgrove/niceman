@@ -26,12 +26,6 @@ env:
 before_install:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
         source osx_install.sh
-      else
-        bash <(wget -q -O- http://neuro.debian.net/_files/neurodebian-travis.sh)
-        travis_retry sudo apt-get update -qq
-        git config --global user.email "test@travis.land"
-        git config --global user.name "Travis Almighty"
-        docker run -d -p 49000:22 rastasheep/ubuntu-sshd:14.04
       fi
 
 install:
