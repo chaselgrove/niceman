@@ -5,19 +5,18 @@ sudo: required
 #dist: precise
 
 os:
-  - linux
   - osx
-
-services:
-  - docker
-
-cache:
-  - apt
 
 matrix:
   include:
-  - python: 2.7
-  - python: 3.4
+    - os: osx
+      osx_image: xcode9
+      language: objective-c
+      env: TRAVIS_PYTHON_VERSION=2.7
+    - os: osx
+      osx_image: xcode9
+      language: objective-c
+      env: TRAVIS_PYTHON_VERSION=3.4
 
 env:
   # to overcome problem with system-wide installed boto on travis
@@ -26,9 +25,7 @@ env:
 
 before_install:
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        git clone https://github.com/matthew-brett/multibuild ~/multibuild
-        source ~/multibuild/osx_utils.sh
-        get_macpython_environment $TRAVIS_PYTHON_VERSION ~/venv
+        source osx_install.sh
       else
         bash <(wget -q -O- http://neuro.debian.net/_files/neurodebian-travis.sh)
         travis_retry sudo apt-get update -qq
