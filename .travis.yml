@@ -29,7 +29,8 @@ before_install:
 
 install:
   # - tools/ci/build_install_apt  # Removed dependency on python-apt!
-  - cd ..; pip install codecov; cd -
+  - pwd
+  - pip install codecov
   - pip install --upgrade pip
   # needed by html5lib
   - pip install --upgrade 'setuptools>=18.5'
