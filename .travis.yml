@@ -24,11 +24,12 @@ env:
   - BOTO_CONFIG=/tmp/nowhere
 
 before_install:
+    - echo "$TRAVIS_OS_NAME"
     - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then source osx_install.sh ; fi
 
 install:
   # - tools/ci/build_install_apt  # Removed dependency on python-apt!
-  - cd ..; pip install -q codecov; cd -
+  - cd ..; pip install codecov; cd -
   - pip install --upgrade pip
   # needed by html5lib
   - pip install --upgrade 'setuptools>=18.5'
